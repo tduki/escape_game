@@ -12,12 +12,22 @@ const httpServer = createServer(app);
 
 // Configuration
 const PORT = process.env.PORT || 5000;
-const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:3000';
+// Allow multiple origins via env (comma-separated). Fallback to CLIENT_URL, then localhost in dev
+const CLIENT_URL = process.env.CLIENT_URL;
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || CLIENT_URL || 'http://localhost:3000')
+  .split(',')
+  .map(o => o.trim());
 
 // Middleware
 app.use(helmet());
 app.use(cors({
-  origin: CLIENT_URL,
+  origin: function(origin, callback) {
+    // Allow non-browser requests (origin undefined) and any origin in the allowlist
+    if (!origin || ALLOWED_ORIGINS.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
 app.use(express.json());
@@ -28,7 +38,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Socket.io configuration
 const io = new Server(httpServer, {
   cors: {
-    origin: CLIENT_URL,
+    origin: ALLOWED_ORIGINS,
     methods: ['GET', 'POST'],
     credentials: true
   }
@@ -42,7 +52,8 @@ app.get('/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     rooms: gameManager.getRoomsCount(),
-    players: gameManager.getPlayersCount()
+    players: gameManager.getPlayersCount(),
+    allowedOrigins: ALLOWED_ORIGINS
   });
 });
 
@@ -215,6 +226,7 @@ io.on('connection', (socket) => {
 httpServer.listen(PORT, () => {
   console.log(`\nAPI docs: http://localhost:${PORT}/docs`);
   console.log(`Health:   http://localhost:${PORT}/health`);
+  console.log(`CORS allowed origins: ${ALLOWED_ORIGINS.join(', ')}`);
 });
 
 // Gestion des erreurs
