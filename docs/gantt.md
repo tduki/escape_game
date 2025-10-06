@@ -25,18 +25,11 @@ gantt
     Animations/feedbacks (polish)          :u4, 2025-10-08, 0.5d
     Accessibilité & responsive             :u5, 2025-10-09, 0.5d
 
-    section Infra/DevOps (Kilian – Infra)
-    Environnement dev (Node/ports)         :k1, 2025-10-06, 0.5d
-    CI/CD front (Vercel)                   :k2, 2025-10-07, 0.5d
-    CI/CD back (Render)                    :k3, 2025-10-07, 0.5d
-    Observabilité (health, logs)           :k4, 2025-10-08, 0.5d
-    Préparation démo (réseau/salle)        :k5, 2025-10-09, 0.5d
-
-    section Infra/Support (Titouan – Infra)
-    Contrôles sécurité (Helmet, CORS)      :t1, 2025-10-06, 0.5d
-    Configuration domaines/ENV             :t2, 2025-10-07, 0.5d
-    Tests de charge légers (multi-rooms)   :t3, 2025-10-08, 0.5d
-    Backup/rollback plan                   :t4, 2025-10-09, 0.5d
+    section Infra (Kilian & Titouan)
+    Setup environnement dev (Node/ports)   :i1, 2025-10-06, 0.5d
+    Déploiement front minimal (Vercel)     :i2, 2025-10-07, 0.5d
+    Déploiement back minimal (Render)      :i3, 2025-10-07, 0.5d
+    Vérifs basiques (health, accès)        :i4, 2025-10-08, 0.5d
 
     section Livrables (All)
     Rapport technique                      :l1, 2025-10-09, 0.5d
@@ -45,5 +38,5 @@ gantt
 ```
 
 Notes:
-- Les durées sont indicatives (0.5d = demi‑journée).
-- Dépendances principales: UI précède intégrations; infra débloque les déploiements; Anis coordonne et intègre.
+- Infra réduite à l’essentiel: environnement, déploiements simples, vérification health.
+- Le reste se concentre sur dev/UX et préparation des livrables/soutenance.
