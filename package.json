@@ -1,0 +1,17 @@
+{
+  "name": "ecospy-mission-climat",
+  "version": "1.0.0",
+  "description": "Escape Game numérique éducatif sur l'environnement - Workshop M1 2025-2026",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server/index.js",
+    "client": "cd client && npm run dev",
+    "install-all": "npm install && cd client && npm install",
+    "build": "cd client && npm run build"
+  },
+  "keywords": ["escape-game", "education", "environment", "multiplayer"],
+  "author": "Workshop M1 EPSI/WIS",
+  "license": "MIT"
+}
+
