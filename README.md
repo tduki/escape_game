@@ -26,6 +26,16 @@ npm run dev # http://localhost:3000
 3. Les autres joueurs rejoignent avec ce code
 4. L’hôte lance la mission; résolvez les 4 salles avant la fin du temps
 
+## 🔗 Configuration prod (Vercel)
+Le front utilise `VITE_SOCKET_URL` pour l’URL du serveur Socket.io.
+- Sur Vercel → Project → Settings → Environment Variables:
+  - Key: `VITE_SOCKET_URL`
+  - Value: `https://<votre-backend>.onrender.com`
+  - Target: Production (et Preview si besoin)
+- Redeploy
+
+Sans cette variable, en production le client ne peut pas se connecter au backend (erreurs ws://localhost:5000).
+
 ## 🧩 Les 4 énigmes
 1. Empreinte Carbone — calcul interactif (logique et chiffres clé)
 2. Océan Pollué — memory game (décomposition des déchets)

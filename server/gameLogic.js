@@ -80,8 +80,9 @@ export class GameManager {
     }
 
     // Vérification de la réponse (insensible à la casse)
+    const normalized = answer.toString().toLowerCase().trim();
     const isCorrect = roomAnswers.some(validAnswer => 
-      answer.toString().toLowerCase().trim() === validAnswer.toString().toLowerCase().trim()
+      normalized === validAnswer.toString().toLowerCase().trim()
     );
 
     if (isCorrect) {
@@ -102,13 +103,19 @@ export class GameManager {
     };
   }
 
-  // Définir les réponses correctes pour chaque énigme
+  // Définir les réponses correctes (simplifiées)
   getCorrectAnswers() {
     return {
-      1: ['2940', '2.940', '2,940'], // Salle 1: Empreinte carbone
-      2: ['8', 'huit'], // Salle 2: Memory game (8 paires)
-      3: ['amazonie', 'amazon', 'amazonia'], // Salle 3: Carte coopérative
-      4: ['60', '60%'], // Salle 4: Mix énergétique
+      // Salle 1: Empreinte carbone
+      // Acceptation des valeurs originales + raccourci facile '1'
+      1: ['2940', '2.940', '2,940', '1'],
+      // Salle 2: Memory (8 paires) + raccourci facile '1'
+      2: ['8', 'huit', '1'],
+      // Salle 3: Région critique + raccourci facile '1'
+      3: ['amazonie', 'amazon', 'amazonia', '1'],
+      // Salle 4: Mix énergétique (>=60%)
+      // On accepte plusieurs paliers + raccourci facile '1'
+      4: ['60', '60%', '65', '65%', '70', '70%', '1'],
     };
   }
 
