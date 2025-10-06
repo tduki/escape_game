@@ -1,0 +1,36 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "EcoSpy Backend API",
+    "version": "1.0.0",
+    "description": "OpenAPI documentation for EcoSpy: Mission Climat backend"
+  },
+  "servers": [
+    { "url": "http://localhost:5000", "description": "Local dev" }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health check",
+        "tags": ["System"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "OK" },
+                    "rooms": { "type": "integer", "example": 0 },
+                    "players": { "type": "integer", "example": 0 }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

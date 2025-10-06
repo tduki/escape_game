@@ -4,6 +4,8 @@ import { Server } from 'socket.io';
 import cors from 'cors';
 import helmet from 'helmet';
 import { GameManager } from './gameLogic.js';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './swagger.json' assert { type: 'json' };
 
 const app = express();
 const httpServer = createServer(app);
@@ -19,6 +21,9 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
+
+// Swagger
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Socket.io configuration
 const io = new Server(httpServer, {
@@ -208,13 +213,8 @@ io.on('connection', (socket) => {
 
 // Démarrage du serveur
 httpServer.listen(PORT, () => {
-  console.log(`
-╔═══════════════════════════════════════════╗
-║   🌍 EcoSpy - Mission Climat 🌍          ║
-║   Serveur démarré sur le port ${PORT}      ║
-║   URL: http://localhost:${PORT}             ║
-╚═══════════════════════════════════════════╝
-  `);
+  console.log(`\nAPI docs: http://localhost:${PORT}/docs`);
+  console.log(`Health:   http://localhost:${PORT}/health`);
 });
 
 // Gestion des erreurs
