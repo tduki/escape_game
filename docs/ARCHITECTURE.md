@@ -7,10 +7,10 @@ EcoSpy - Mission Climat utilise une architecture client-serveur basée sur WebSo
 ```
 ┌─────────────────┐         WebSocket (Socket.io)      ┌─────────────────┐
 │                 │◄──────────────────────────────────►│                 │
-│  React Client   │                                     │  Node.js Server │
+│  React Client   │                                    │  Node.js Server │
 │  (Port 3000)    │         HTTP/HTTPS                 │  (Port 5000)    │
 │                 │◄──────────────────────────────────►│                 │
-└─────────────────┘                                     └─────────────────┘
+└─────────────────┘                                    └─────────────────┘
         │                                                        │
         │                                                        │
         ▼                                                        ▼
